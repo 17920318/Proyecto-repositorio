@@ -185,10 +185,10 @@
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
+                                    <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
                                     
                                 </div>
-                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
+                                <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
                                 
                                 <p class="mb-0"></p>
                             </div>
@@ -198,9 +198,9 @@
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-book"></i></a>
+                                    <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-book"></i></a>
                                 </div>
-                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
+                                <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
                            
                                 <p class="mb-0"></p>
                             </div>
@@ -210,9 +210,9 @@
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
+                                    <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
                                 </div> 
-                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
+                                <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
                                  
                                 <p class="mb-0"></p>
                             </div>
@@ -222,9 +222,9 @@
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-people-line"></i></a>
+                                    <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-people-line"></i></a>
                                 </div>
-                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
+                                <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
                                 <p class="mb-0"></p>
                             </div>
                         </div>
@@ -233,9 +233,9 @@
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
+                                    <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
                                 </div>
-                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
+                                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
                                
                                 <p class="mb-0"></p>
                             </div>
@@ -245,10 +245,10 @@
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-people-group"></i></a>
+                                    <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-people-group"></i></a>
                                 </div>
                                 
-                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
+                                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
 
                                 <p class="mb-0"></p>
                             </div>
@@ -258,10 +258,10 @@
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
+                                    <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
                                 </div>
 
-                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Coordinaciones</h2></a>
+                                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Coordinaciones</h2></a>
                                 <p class="mb-0"></p>
                             </div>
                         </div>

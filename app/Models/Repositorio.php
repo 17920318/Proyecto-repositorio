@@ -48,7 +48,9 @@ class Repositorio extends Model
 		'documento',
 		'nomenclatura',
 		'descripcion',
-		'ubicacion'
+		'ubicacion',
+		'url',
+		'file',
 	];
 
 	public function usuario()

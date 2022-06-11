@@ -2,87 +2,101 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Repositorio;
-
+use App\Models\Tipomaterial;
+use App\Models\Detallerepo;
+use App\Models\Repotema;
+use App\Models\Tema;
+use Illuminate\Support\Facades\DB;
 class DropzoneController extends Controller
 {
     public function dropzone(){
-        return view ('layouts.dropzone');
-    }
-    /*public function dropzoneStore(Request $request)
-    {
-        $image = $request->file('file');
-        $imageName = time(). '.' .$image->extension();
-        $image->move(public_path('images'),$imageName);
-        return response()->json(['success'=>$imageName]);
-
-    }*/
-
-    public function store(Request $request)
-    {
-        $request->validate([
-        'documento',
-		'nomenclatura',
-		'descripcion',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-  
-        $input = $request->all();
-  
-        if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        }
-    
-        Repositorio::create($input);
-     
-        return redirect()->route('layouts.index')
-                        ->with('success','Product created successfully.');
-    }
-     
-    public function show(Repositorio $repositorio)
-    {
-        return view('layouts.show',compact('product'));
-    }
-     
-    public function edit(Repositorio $repositorio)
-    {
-        return view('layouts.edit',compact('product'));
+        $tipomateriales = Tipomaterial::all();
+        $tema = Tema::all();
+        return view ('layouts.dropzone',
+        compact('tipomateriales', 'tema'));
+ 
     }
     
-    public function update(Request $request, Repositorio $repositorio)
+    public function dropzoneStore(Request $request)
+    {
+        $this->validateData($request);
+       
+        $archivo = "";
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $archivo = $file->getClientOriginalName();
+        }
+        $campos=[
+            'file'          => $archivo,
+            'documento'     => $request->documento,
+            'descripcion'   => $request->descripcion,
+            'nomenclatura'  => $request->nomenclatura,
+            'ubicacion'     => $request->ubicacion,
+            'url'           => $request->url,
+            'fecha'=> date('Y-m-d'),
+        ];
+        $material_id= $request->tipo;
+        $tema_id= $request->tema;
+
+        if ($request->hasFile('file')) $file->move(public_path('images'), $archivo);
+       // print_r($campos); exit;
+    DB::beginTransaction();
+    try {
+        $repositorio = Repositorio::create($campos);
+        $detallerepo = [
+            "repositorio_id"=>$repositorio->id,
+            "material_id"=>$material_id,
+            "cantidad"=>1
+        ];
+        $repotema = [
+            "repositorio_id"=>$repositorio->id,
+            "tema_id"=>$tema_id
+            
+        ];
+      
+        Detallerepo::create($detallerepo);
+        Repotema::create($repotema);
+        //...
+        DB::commit();
+    } catch(\Exception  $ex){
+        $message = $ex->getMessage();
+
+        DB::rollback();
+        echo "$message"; exit;
+    }
+
+    return redirect("dropzone");
+
+    }
+
+    function validateData(Request $request)
     {
         $request->validate([
-        'documento' => 'required',
-		'nomenclatura' => 'required',
-		'descripcion' => 'required',
+            'documento' => 'required|max:200',
+            'descripcion' => 'required'
         ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+   public function store(Request $request)
+    {
+        //Storage::disk('local')->put('example.txt', 'Contents');
+    }
+
   
-        $input = $request->all();
-  
-        if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        }else{
-            unset($input['image']);
-        }
+    public function download (Repositorio $archivo){
           
-        $product->update($input);
-    
-        return redirect()->route('layouts.index')
-                        ->with('success','Product updated successfully');
-    }
-  
-    public function destroy(Repositorio $repositorio)
-    {
-        $repositorio->delete();
-     
-        return redirect()->route('layouts.index')
-                        ->with('success','Product deleted successfully');
+    return response()->download(public_path(('images/'.$archivo->documento)), $archivo->title);
+
+            
     }
 }
+    

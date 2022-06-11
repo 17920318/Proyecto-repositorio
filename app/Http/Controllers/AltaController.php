@@ -13,7 +13,7 @@ class AltaController extends Controller
      */
     public function index()
     {
-      
+      return view ('View.edit');
         //
     }
 

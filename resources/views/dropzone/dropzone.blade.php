@@ -66,7 +66,7 @@
                             Subir Archivo
                         </div>
                         <div class="card-body">
-                            <form action="{{route('dropzone.store')}}" method="POST"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
+                            <form  class= "row g-3" action="{{route('dropzone.store')}}" method="POST"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
                                
                                 @csrf
                                 <input type="file" name="file" />
@@ -74,11 +74,13 @@
                                     <h3 class="text-center">Upload Image By click on box</h3>
                                 </div>
                                 <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                
                             </form>
+                           
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>
+              
             </div>
         </div>
 

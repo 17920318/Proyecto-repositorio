@@ -35,26 +35,25 @@
                     </ul>
                     
                 </div>
-                
-            </div>
         </nav>
         <!-- Header-->
         <header class="py-5">
-          
             <div class="container px-lg-6">
-                <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Repositorio Colegio de Profesionistas, Compartir Conocimiento</p></h1>
+                <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Colegio de Profesionistas, Compartir Conocimiento</p></h1>
                 <br>
-                
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
                         <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="estudiantes">
                       </div>
                       <div class="carousel-item">
-                        <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="salon de clases">
+                        <img src="{{asset('img/ieu.jpg')}}" class="img-fluid" alt="salon de clases">
                       </div>
                       <div class="carousel-item">
-                        <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="salon de clases2">
+                        <img src="{{asset('img/convenio.jpg')}}" class="img-fluid" alt="salon de clases2">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{asset('img/oaxaca.jpg')}}" class="img-fluid" alt="salon de clases3">
                       </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -66,42 +65,41 @@
                       <span class="visually-hidden">Next</span>
                     </button>
                   </div>
-
-                <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                  <br>
+                  <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">
-                        <h1 class="display-5 fw-bold mt-0">EXPLORAR</h1>
-                        <br>
-                        <br>
-                        <br>
-                        <form class="row g-3">
+                        
+                        <form class="row g-3" method="post" action="{{ route('busqueda.store') }}">
+                            @csrf
                             <div class="col-md-4">
-                              <label for="inputEmail4" class="form-label">Tema</label>
-                              <input type="email" class="form-control" id="inputEmail4">
+                              <label for="tema" class="form-label">Tema</label>
+                              <input type="text" class="form-control" id="tema" name="tema">
                             </div>
                             <div class="col-md-4">
-                              <label for="inputPassword4" class="form-label">Titulo</label>
-                              <input type="password" class="form-control" id="inputPassword4">
+                              <label for="titulo" class="form-label">Titulo</label>
+                              <input type="text" class="form-control" id="titulo" name="titulo">
                             </div>
                            
                             <div class="col-md-4">
-                                <label for="inputAño" class="form-label">Año</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Todos</option>
-                                <option value="1">2022</option>
-                                <option value="2">2021</option>
-                                <option value="3">2020</option>
-                                <option value="4">2019</option>
-                                <option value="5">2018</option>
-                                <option value="6">2017</option>
-                                <option value="7">2016</option>
-                                <option value="8">2015</option>
-                                <option value="9">2014</option>
+                                <label for="anio" class="form-label">Año</label>
+                            <select class="form-select" name="anio" aria-label="Default select example">
+                                <option selected value="-1">Todos</option>
+                                @php
+                                    $year = date('Y');
+                                    for ($i=$year; $i>=2009; $i--){
+                                        echo "<option value='" . $i ."'>".$i. "</option>";
+                                    }
+                                @endphp
                               </select>
                             </div>
+                            
                             <div class="col-md-4">
-                                <label for="inputAño" class="form-label">Mes</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Todos</option>
+                                <label for="mes" class="form-label">Mes</label>
+                            <select class="form-select" name="mes" aria-label="Default select example">
+                                <option selected value="-1">Todos</option>
+                               
+                                
+                                
                                 <option value="1">Enero</option>
                                 <option value="2">Febrero</option>
                                 <option value="3">Marzo</option>
@@ -118,205 +116,189 @@
                               </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputAño" class="form-label">Tipo</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Todos</option>
-                                <option value="1">Propuestas de ley</option>
-                                <option value="2">Talleres</option>
-                                <option value="3">Foros</option>
-                                <option value="4">Infografías</option>
-                                <option value="5">Articulos</option>
-                                <option value="6">Mesa de profesionitas</option>
-
+                                <label for="tipo" class="form-label">Tipo</label>
+                            <select class="form-select" name="tipo" aria-label="Default select example">
+                                @foreach($tipomateriales as $tipo)
+                                    <option value="{{$tipo->id}}">{{$tipo->descripcion}}</option>";
+                                @endforeach
                               </select>
                             </div>
-                            
                             <div class="col-md-4">
-                                <label for="inputAño" class="form-label">Coordinaciones</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected> </option>
-                               
-                                <option value="14">Todas</option>
-                                <option value="1">Coord.Gral. de Profesionales de la comunicación</option>
-                                <option value="2">Coord.Gral. de Profesionales de la contaduría</option>
-                                <option value="3">Coord.Gral. de Profesionales de la optometría</option>
-                                <option value="4">Coord.Gral. de Profesionales de la nutrición</option>
-                                <option value="5">Coord.Gral. de Profesionales de la informática</option>
-                                <option value="6">Coord.Gral. de Profesionales del derecho</option>
-                                <option value="7">Coord.Gral. de Profesionales de la criminalística y criminología</option>
-                                <option value="8">Coord.Gral. de Profesionales de la comunicación</option>
-                                <option value="9">Coord.Gral. de Profesionales de las ciencias forenses</option>
-                                <option value="10">Coord.Gral. de Profesionales de la educación</option>
-                                <option value="11">Coord.Gral. de Profesionales de la imagen estratégica</option>
-                                <option value="13">Coord.Gral. de Profesionales de la ingeniería civil</option>
-                              </select>
-                            </div>
+                              <label for="coordinacion" class="form-label">Coordinaciones</label>
+            
+                            <select class="form-select" name="coordinacion" aria-label="Default select example">
+                              @foreach($coordinaciones as $coordinacion)
+                                <option value="{{$coordinacion->id}}">{{$coordinacion->descripcion}}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                          
                             <center>
                             <div class="col-md-6">
-                              <button type="submit" class="btn btn-primary btn-form" style="display: block"><i class="fa-solid fa-magnifying-glass"></i>     Buscar</button>
+                              <button type="submit" class="btn btn-lg btn-warning" style="display: block"><i class="fa-solid fa-magnifying-glass"></i>     buscar</button>
                             </div>
                             </center>
                           </form>
-                    <p class="fs-6"></p>
-                        <style>
-                            form{
-                                display: flex;
-                                flex-wrap: wrap;
-                                justify-content: space-between;
-                            }
-                            .btn-form{
-                                box-sizing: border-box;
-                                margin-top: 30px;
-                            }
-                            .fa-scale-balanced ,.fa-book, .fa-file-signature, .fa-people-line, .fa-users-between-lines, .fa-people-group, .fa-users-gear {
-                            
-                            font-size: 8ch;
-                        }
-                        
-                            .col-xxl-4{
-                                width: 30%;
-                                margin-left: auto;
-                                margin-right: auto;
-                            }
-                            .container{
-                               
-                                margin-left: auto;
-                                margin-right: auto;
-                            }
-                            
-                            .feature{
-                                height: 10rem;
-                            width: 10rem;
-                            font-size: 8ch;
-                            background-color: rgb(65, 9, 117) !important;
-                            }
-                            .btn-primary{
-                                --bs-bg-opacity: 1;
-                             background-color: rgb(65, 9, 117) !important;
-
-                            }
-                            
-                            
-
-                            .bg-dark {
-                                --bs-bg-opacity: 1;
-                             background-color: rgb(65, 9, 117) !important;
-                            }
-                            .bg-orange{
-                                background-color: rgb(184, 129, 12) !important;
-                            }
-                        </style>
-                    </div>
+                    </div>   
                 </div>
             </div>
-        </header>
-        <!-- Page Content-->
-        <section class="pt-4">
+            <p class="fs-6"></p>
+            <style>
+                form{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                }
+                .btn-form{
+                    box-sizing: border-box;
+                    margin-top: 30px;
+                }
+                .fa-scale-balanced ,.fa-book, .fa-file-signature, .fa-people-line, .fa-users-between-lines, .fa-people-group, .fa-users-gear {
+                
+                    font-size: 8ch;
+                }
+               
+                .col-xxl-4{
+                    width: 30%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .feature{
+                    height: 10rem;
+                width: 10rem;
+                font-size: 8ch;
+                background-color: rgb(65, 9, 117) !important;
+                }
+            
+                .bg-dark {
+                    --bs-bg-opacity: 1;
+                 background-color: rgb(65, 9, 117) !important;
+                }
+                .bg-orange{
+                    background-color: rgb(184, 129, 12) !important;
+                }
+            </style>
+            </div>
+            </div>
+            </div>
+            </header>
+            <!-- Page Content-->
+            <section class="pt-4">
             <div class="container px-lg-5">
-                <!-- Page Features-->
-                <div class="row gx-lg-5">
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
-                                    
-                                </div>
-                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
-                                
-                                <p class="mb-0"></p>
-                            </div>
-                        </div>
+            <!-- Page Features-->
+            <div class="row gx-lg-5">
+            <div class="col-lg-6 col-xxl-4 mb-5">
+            <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
+                        
                     </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-book"></i></a>
-                                </div>
-                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
-                           
-                                <p class="mb-0"></p>
-                            </div>
-                        </div>
+                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
+                    
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+            <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-book"></i></a>
                     </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
-                                </div> 
-                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
-                                 
-                                <p class="mb-0"></p>
-                            </div>
-                        </div>
+                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
+               
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+            <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
+                    </div> 
+                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
+                     
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+            <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-people-line"></i></a>
                     </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-people-line"></i></a>
-                                </div>
-                                <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
-                                <p class="mb-0"></p>
-                            </div>
-                        </div>
+                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+            <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
                     </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
-                                </div>
-                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
-                               
-                                <p class="mb-0"></p>
-                            </div>
-                        </div>
+                        <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
+                   
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+            <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-people-group"></i></a>
                     </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-people-group"></i></a>
-                                </div>
-                                
-                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
-
-                                <p class="mb-0"></p>
-                            </div>
-                        </div>
+                    
+                        <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
+            
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+            <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                        <a class="btn btn-outline-warning" href="{{ url('/lista') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
                     </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                    <a class="btn btn-outline-warning" href="{{ url('/dropzone') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
-                                </div>
-
-                                    <a class="btn btn-darck" href="{{ url('/dropzone') }}" role="button"><h2 class="fs-4 fw-bold">Coordinaciones</h2></a>
-                                <p class="mb-0"></p>
-                            </div>
+            
+                        <a class="btn btn-darck" href="{{ url('/lista') }}" role="button"><h2 class="fs-4 fw-bold">Coordinaciones</h2></a>
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 7]) }}" role="button"><i class="fa-solid fa-handshake"></i></a>
                         </div>
+                            <a class="btn btn-darck" href="{{route('formulario', ['id' => 7]) }}" role="button"><h2 class="fs-4 fw-bold">Convenios</h2></a>
+                       
+                        <p class="mb-0"></p>
                     </div>
                 </div>
             </div>
-        </section>
-    
+            </div>
+            </section>
             <main class="py-4">
             @yield('content')
-        </main>
-        <!-- Footer-->
-        <footer class="py-5 bg-orange">
+            </main>
+            <!-- Footer-->
+            <footer class="py-5 bg-orange">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
-            <img src="{{asset('img/logoCirculo.png')}}" alt="logo" width="10%" height="auto" >
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        
-    </body>
-
-</html>
+            </footer>
+            <!-- Bootstrap core JS-->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Core theme JS-->
+            <script src="js/scripts.js"></script>
+            
+            </body>
+            
+            </html>
+            
