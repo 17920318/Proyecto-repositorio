@@ -1,8 +1,9 @@
 @extends('plantilla')
   
 @section('content')
-<div class="container px-lg-1">
+
 <br>
+
  <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
 Regresar</a>
     <center>
@@ -19,6 +20,7 @@ Regresar</a>
      
       <th scope="col">Fecha</th>
       <th scope="col">Archivo</th>
+      <th scope="col">Vizualizar</th>
       <th scope="col">Acciones</th>
     </tr>
                       
@@ -40,26 +42,39 @@ Regresar</a>
 
                         </td>
 
+                       
                         <td>
-                            <a class="btn btn-primary  btn-sm" title="abrir archivo" target="_blank" href="images/{{ $sq->file }}" role="button"><i class="fa fa-eye" aria-hidden="true"></i>
-                                Abrir</a>
-                                @php
-                                
-                            @endphp
-                            @if ($esAdm) === 1
-                                I have one record!
-                            @else
-                                I don't have any records!
-                            @endif                   
-                                <a class="btn btn-success  btn-sm"  href="{{ url('/edit') }}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                Editar</a>
-                                
-                                @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                                           
-                                <a class="btn btn-warning  btn-sm"  href="{{ url('download/'.$sq->id) }}" role="button"><i class="fa fa-download" aria-hidden="true"></i>Descargar</a>
-                           
-                        </td>   
+                            @foreach( preg_split("/\|/",$sq->file) as $archivo)
+                            <a href="images/{{$archivo}}" target="_blank">
+                            {{$archivo}} <br> </a>
+                        @endforeach
+                        </td>
+                        
+           
+                        <td>
+              
+                            <a class="btn btn-warning  btn-sm"     href="{{ url('download/'.$sq->id) }}"     role="button"><i class="fa fa-download" aria-hidden="true"></i>
+  Descargar</a>
+             
+
+ 
+    @php 
+    @endphp
+    @if ($esAdministrador === true)
+        
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+
+                  
+
+               
+    <a class="btn btn-success  btn-sm"  href="{{ route('busqueda.edit', $sq->id)}}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+Editar</a>
+</td>   
+     
+@else
+           
+@endif 
                     </form>  
         
                     </tr>

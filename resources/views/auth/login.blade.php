@@ -9,9 +9,7 @@
                 <center>
                 <div class="card-header">{{ __('') }}
                     
-                 
                     <div align="center"> <img src="{{asset('img/logoCirculo.png')}}" alt="logo" width="30%" height="auto"></div>
-                
                 
                 </div>
                 </center>

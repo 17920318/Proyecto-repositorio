@@ -30,10 +30,12 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"><i class="fa fa-home" aria-hidden="true"></i>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url()->previous() }}"><i class="fa fa-home" aria-hidden="true"></i>
                              home</a></li>
-                        
-                        <li class="nav-item"><a class="nav-link" href="#!"><i class="fa-solid fa-user"></i> usuario</a></li>
+                             @if ($esAdministrador == true )
+                             <li class="nav-item"><a class="nav-link" href="{{ url('/mostrar') }}"><i class="fa-solid fa-user"></i> {{ auth()->user()->name }}</a>
+
+                  @endif
                     </ul>
                     
                 </div>
@@ -43,7 +45,7 @@
         <header class="py-5">
            
             <div class="container px-lg-7">
-         <a class="btn btn-primary" href="{{ url('busqueda') }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
+         <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
                 <center>
                 <h1 class="display-5 fw-bold mt-0">COORDINACIONES</h1>
                 </center>
@@ -110,7 +112,6 @@
                 .btn-primary{
                     --bs-bg-opacity: 1;
                 background-color: rgb(65, 9, 117) !important;
-
                 }
                 
                 

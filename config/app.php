@@ -194,6 +194,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+    'zip' => App\Http\Controllers\ZipArchive::class,
     ])->toArray(),
     //'Auth0' => Auth0\Login\Facade\Auth0::class,
 ];

@@ -20,12 +20,32 @@ class BusquedaController extends Controller
     public function index()
     {
         
+    $id_usuario = session("usuario_id");
+    //$id_usuario = $_SESSION['user'];
+     
+    $sql2="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+    ON r.id=ur.rol_id 
+    WHERE ur.usuario_id =:usuario";
+    
+    $query=DB::raw($sql2);
+    //dd($query);
+    $consulta= DB::select(DB::raw($sql2),['usuario'=>$id_usuario]);
+        
         $tipomateriales = Tipomaterial::all();
         $coordinaciones = Rol::all();
         return view ('repositorio.find',
-        compact('tipomateriales','coordinaciones'));
+        compact('tipomateriales','coordinaciones'))->with('esAdministrador',$this->isAdmin2($consulta));
       
      
+    }
+    private function isAdmin2($filas){
+        foreach ($filas as $fila){
+            if (in_array( $fila->id, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] )){
+                return true;
+            }
+            
+        }
+        return false;
     }
     public function welcome(){
         $tipomateriales = Tipomaterial::all();
@@ -34,7 +54,10 @@ class BusquedaController extends Controller
         compact('tipomateriales','coordinaciones'));
         
     }
+  
     
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -59,6 +82,8 @@ class BusquedaController extends Controller
        $tema = "%$tema%";
        $titulo = $request->titulo??"";
        $titulo = "%$titulo%";
+    
+       $file = "";
        $anio = $request->anio==-1?"":$request->anio;
        $anio = "%$anio%";
        $mes = $request->mes==-1?"":$request->mes;
@@ -86,29 +111,51 @@ class BusquedaController extends Controller
             'titulo'=> $titulo,
             'mes'=> $mes ,
             'anio'=> $anio ,
-          'coordinacion'=> $coordinacion 
+          'coordinacion'=> $coordinacion,
+        
         ];
+
         //subir archivos
-        //dd($_SESSION);
+
+     
         $query=DB::raw($sql);
+       
         $repositorios= DB::select(DB::raw($sql),$parameters);
+    
+        // ($repositorios); exit;
+       // dd($repositorios); exit; 
+
+      //Consultar roles y permisos
+      $id_usuario = session("usuario_id");
+      //$id_usuario = $_SESSION['user'];
        
-        //Consultar roles y permisos
-        $id_usuario = session("id_usuario");
-       //$id_usuario = $_SESSION['user'];
+      $sql="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+      ON r.id=ur.rol_id 
+      WHERE ur.usuario_id =:usuario";
+      
+      $query=DB::raw($sql);
+      //dd($query);
+      $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
+      //dd($consulta);
+      
+      return view ('repositorio.show', compact('repositorios','consulta'))->with('esAdministrador',$this->isAdmin($consulta));
+       
+   }
+
+
+   private function isAdmin($filas){
+       foreach ($filas as $fila){
+           if (in_array( $fila->id, [5,6] )){
+               return true;
+           }
+           
+       }
+       return false;
+   }
         
-       $sql="SELECT * FROM usuario u INNER JOIN usuariorol ur
-       INNER JOIN rol r ON u.id =ur.usuario_id AND ur.rol_id=r.id
-       INNER JOIN permiso p INNER JOIN rolpermiso rp ON p.id = rp.permiso_id
-       AND rp.rol_id = r.id WHERE u.id=:usuario";
-       
-       $query=DB::raw($sql);
-       $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
-       dd($consulta);
-       
-       return view ('repositorio.show', compact('repositorios'))->with('esAdministrador',true);
-        
-    }
+    
+  
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -133,27 +180,33 @@ class BusquedaController extends Controller
         {
             $this->validateData($request);
        
-            $archivo = "";
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $archivo = $file->getClientOriginalName();
-            }
+            $fileNames="";
+            if ($request->file('file'))
+            foreach($request->file('file') as $file)
+            {
+                $name=$file->getClientOriginalName();
+                $file->move(public_path('images'), $name);
+                $fileNames = $fileNames.$name."|";  
+                        }
+                $fileNames=substr($fileNames,0,strlen($fileNames)-1);
+                        
             $currentValue = Repositorio::find($id);
         
-        if (empty($archivo)) $archivo = $currentValue->file;
-             
-        $campos=[
-                 'file'          => $archivo,
+        if (empty($fileNames)) $fileNames = $currentValue->file;
+             $campos=[
+                'file'           => $fileNames,
                  'documento'     => $request->documento,
-                 'url'           => $request->url,
                  'descripcion'   => $request->descripcion,
+                 'url'           => $request->url
                  
              ];
-             if ($request->hasFile('file')) $file->move(public_path('images'), $archivo);
+             
              
              Repositorio::whereId($id)->update($campos);
              return redirect('busqueda')->with('success', 'Actualizado correctamente...');
          }
+     
+    
          function validateData(Request $request)
          {
              $request->validate([
@@ -168,6 +221,8 @@ class BusquedaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
+
         public function destroy($id)
     {
         DB::beginTransaction();

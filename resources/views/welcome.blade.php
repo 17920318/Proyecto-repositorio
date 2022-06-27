@@ -15,8 +15,6 @@
         <link href="asset({img/taller})" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/f687c855f2.js" crossorigin="anonymous"></script>
         
-
-
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -29,9 +27,9 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        
-                        
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}"><i class="fa-solid fa-user"></i> Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/informacion') }}"><i class="fa fa-hand-o-right" style=" color: rgb(201, 177, 25);"></i> Conócenos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}"><i class="fa-solid fa-user" style=" color: rgb(201, 177, 25);"></i> Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/contactos') }}"><i class="bi bi-chat-dots" style=" color: rgb(201, 177, 25);"></i> ¿Quieres una Consultoría?</a></li>
                     </ul>
                     
                 </div>
@@ -39,7 +37,7 @@
         <!-- Header-->
         <header class="py-5">
             <div class="container px-lg-6">
-                <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Colegio de Profesionistas, Compartir Conocimiento</p></h1>
+                <h2 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Colegio de Profesionistas, Compartir Conocimiento</p></h2>
                 <br>
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -64,11 +62,10 @@
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
                     </button>
-                  </div>
-                  <br>
                   <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">
-                        
+                        <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Explora Nuestro Repositorio</p></h1>
+                        <br>
                         <form class="row g-3" method="post" action="{{ route('busqueda.store') }}">
                             @csrf
                             <div class="col-md-4">
@@ -186,113 +183,122 @@
             <section class="pt-4">
             <div class="container px-lg-5">
             <!-- Page Features-->
-            <div class="row gx-lg-5">
-            <div class="col-lg-6 col-xxl-4 mb-5">
-            <div class="card bg-light border-0 h-100">
-                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
-                        
-                    </div>
-                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
-                    
-                    <p class="mb-0"></p>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-6 col-xxl-4 mb-5">
-            <div class="card bg-light border-0 h-100">
-                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-book"></i></a>
-                    </div>
-                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
-               
-                    <p class="mb-0"></p>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-6 col-xxl-4 mb-5">
-            <div class="card bg-light border-0 h-100">
-                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
-                    </div> 
-                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
-                     
-                    <p class="mb-0"></p>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-6 col-xxl-4 mb-5">
-            <div class="card bg-light border-0 h-100">
-                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-people-line"></i></a>
-                    </div>
-                    <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
-                    <p class="mb-0"></p>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-6 col-xxl-4 mb-5">
-            <div class="card bg-light border-0 h-100">
-                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
-                    </div>
-                        <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
-                   
-                    <p class="mb-0"></p>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-6 col-xxl-4 mb-5">
-            <div class="card bg-light border-0 h-100">
-                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                        <a class="btn btn-outline-warning" href="{{ url('/filtro') }}" role="button"><i class="fa-solid fa-people-group"></i></a>
-                    </div>
-                    
-                        <a class="btn btn-darck" href="{{ url('/filtro') }}" role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
-            
-                    <p class="mb-0"></p>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-6 col-xxl-4 mb-5">
-            <div class="card bg-light border-0 h-100">
-                <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                        <a class="btn btn-outline-warning" href="{{ url('/lista') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
-                    </div>
-            
-                        <a class="btn btn-darck" href="{{ url('/lista') }}" role="button"><h2 class="fs-4 fw-bold">Coordinaciones</h2></a>
-                    <p class="mb-0"></p>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-6 col-xxl-4 mb-5">
+            <div class="row gx-lg-4">
+                <div class="col-lg-6 col-xxl-4 mb-5">
                 <div class="card bg-light border-0 h-100">
                     <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 7]) }}" role="button"><i class="fa-solid fa-handshake"></i></a>
+                            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 6]) }}" role="button"><i class="fa-solid fa-scale-balanced"></i></a>
+                            
                         </div>
-                            <a class="btn btn-darck" href="{{route('formulario', ['id' => 7]) }}" role="button"><h2 class="fs-4 fw-bold">Convenios</h2></a>
+                        <a class="btn btn-darck" href="{{route('formulario', ['id' => 6]) }}" role="button"><h2 class="fs-4 fw-bold">Propuestas de ley</h2></a>
+                        
+                        <p class="mb-0"></p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 5]) }}" role="button"><i class="fa-solid fa-book"></i></a>
+                        </div>
+                        <a class="btn btn-darck" href="{{route('formulario', ['id' => 5]) }}" role="button"><h2 class="fs-4 fw-bold">Articulos</h2></a>
+                   
+                        <p class="mb-0"></p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 3]) }}" role="button"><i class="fa-solid fa-file-signature"></i></a>
+                        </div> 
+                        <a class="btn btn-darck" href="{{route('formulario', ['id' => 3]) }}" role="button"><h2 class="fs-4 fw-bold">Infografías</h2></a>
+                         
+                        <p class="mb-0"></p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 4]) }}" role="button"><i class="fa-solid fa-people-line"></i></a>
+                        </div>
+                        <a class="btn btn-darck" href="{{route('formulario', ['id' => 4]) }}"role="button"><h2 class="fs-4 fw-bold">Mesa de profesionitas</h2></a>
+                        <p class="mb-0"></p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 1]) }}" role="button"><i class="fa-solid fa-users-between-lines"></i></a>
+                        </div>
+                            <a class="btn btn-darck" href="{{route('formulario', ['id' => 1]) }}" role="button"><h2 class="fs-4 fw-bold">Talleres</h2></a>
                        
                         <p class="mb-0"></p>
                     </div>
                 </div>
-            </div>
-            </div>
-            </section>
+                </div>
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                            <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 2]) }}"role="button"><i class="fa-solid fa-people-group"></i></a>
+                        </div>
+                        
+                            <a class="btn btn-darck" href="{{route('formulario', ['id' => 2]) }}"role="button"><h2 class="fs-4 fw-bold">Foros</h2></a>
+                
+                        <p class="mb-0"></p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 7]) }}"role="button"><i class="fa-solid fa-people-group"></i>
+                </a>
+                            </div>
+                                <a class="btn btn-darck" href="{{route('formulario', ['id' => 7]) }}" role="button"><h2 class="fs-4 fw-bold">Convenios</h2></a>
+                           
+                            <p class="mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+                            <a class="btn btn-outline-warning" href="{{ url('/lista') }}" role="button"><i class="fa-solid fa-users-gear"></i></a>
+                        </div>
+                
+                            <a class="btn btn-darck" href="{{ url('/lista') }}" role="button"><h2 class="fs-4 fw-bold">Coordinaciones</h2></a>
+                        <p class="mb-0"></p>
+                    </div>
+                </div>
+                </div>
+                
+                </div>
+                </section>
             <main class="py-4">
             @yield('content')
             </main>
             <!-- Footer-->
             <footer class="py-5 bg-orange">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+            <h4><div class="container"><p class="m-0 text-center text-black">Visita nuestras redes sociales:</p></div></h4>
+            <br>
+            <center>
+            <a href="https://www.facebook.com/ColegioDeProfesionistas" class="bi bi-facebook fa-3x " aria-hidden="true" span style=" color: blue;"></a>
+            <a href="https://www.facebook.com/ColegioDeProfesionistas" class="bi bi-twitter fa-3x"></a>
+           
+            </center>
             </footer>
+
             <!-- Bootstrap core JS-->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
             <!-- Core theme JS-->
@@ -301,4 +307,3 @@
             </body>
             
             </html>
-            

@@ -80,8 +80,22 @@ class LoginController extends Controller
 
         if ($usuario && Hash::check($request['password'],$usuario->password)){
             $_SESSION['user']=$usuario->id;
-           //dd($_SESSION['user']);
-           session(['id_usuario' => $usuario->id]);
+            session(['usuario_id'=>$usuario->id]);
+         //   dd($usuario);
+
+
+        /*class ProfileController extends Controller {
+            public function updateProfile(Request $request) {
+                if ($request->user()) {
+                    $email = $request->user()->email;
+                }
+            }
+        }
+        auth()->user()
+        auth()->user()->usuario_id
+        auth()->user()->name
+        auth()->user()->gmail
+         */
         }
         
 // ($repositorios); exit;

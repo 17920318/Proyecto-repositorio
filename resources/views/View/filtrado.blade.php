@@ -43,10 +43,12 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"><i class="fa fa-home" aria-hidden="true"></i>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url()->previous() }}"><i class="fa fa-home" aria-hidden="true"></i>
                              home</a></li>
-                        
-                        <li class="nav-item"><a class="nav-link" href="#!"><i class="fa-solid fa-user"></i> usuario</a></li>
+                             @if ($esAdministrador == true )
+                             <li class="nav-item"><a class="nav-link" href="{{ url('/mostrar') }}"><i class="fa-solid fa-user"></i> {{ auth()->user()->name }}</a>
+
+                             @endif
                     </ul>
                     
                 </div>
@@ -56,7 +58,7 @@
     </head>
     <br>
             <div class="container px-lg-7">
-             <a class="btn btn-primary" href="{{ url('busqueda') }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
+             <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
             @if( $id == 5)
                 <center>
                 <h1 class="display-5 fw-bold mt-0">ARTICULOS</h1>
@@ -109,66 +111,23 @@
                         <br>
                         <br>
                         <br>
-                        <div class="container px-lg-5">
-                            <div class="d-grid gap-2 col-5 mx-auto">
-                            <a class="btn btn-warning" href="{{ url('/dropzone') }}" role="button">Subir Archivo</a> 
-                        </div>
-
-                        <br>
-                        <br>
+                        
                         
                 </form>
-
+                @if ($esAdministrador == true )
+                <div class="container px-lg-5">
+                    <div class="d-grid gap-2 col-5 mx-auto">
+                    <a class="btn btn-warning" href="{{ url('/dropzone') }}" role="button">Subir Archivo</a> 
                 </div>
-                </div>
-
-                <table class="table responsive table-striped">
-                <tbody>
-                        <tr>
-     
-      <th scope="col">Fecha</th>
-      <th scope="col">Archivo</th>
-      <th scope="col">Acciones</th>
-    </tr>
-                @foreach($tipos as $ti)
-                    
-           
-                        <td>
-                            {{ $ti->fecha }}
-                        </td>
-                       
-                        <td>
-                            
-                            {{ $ti->documento }}
-
-
-
-
-                        </td>
-
-                        <td>
-                           
-                    
-                                   <a class="btn btn-primary  btn-sm" title="abrir archivo" target="_blank" href="images/{{ $ti->documento }}" role="button"><i class="fa fa-eye" aria-hidden="true"></i>
-Abrir</a>
                
-                           <a class="btn btn-success  btn-sm"  href="{{ url('/edit') }}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-Editar</a>
+               
+                <br>
+                <br>
+                </div>
+                 @endif
+                </div>
 
-
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                           
-                          <a class="btn btn-warning  btn-sm"  href="{{ url('dropzone.download') }}" role="button"><i class="fa fa-download" aria-hidden="true"></i>
-Descargar</a>
-
-                        </td>   
-                        
-        
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-                
+               
                 <style>
                     form{
                         display: flex;

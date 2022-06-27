@@ -24,7 +24,8 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
          <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -43,10 +44,12 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"><i class="fa fa-home" aria-hidden="true"></i>
-                             home</a></li>
                         
-                        <li class="nav-item"><a class="nav-link" href="#!"><i class="fa-solid fa-user"></i> usuario</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('busqueda') }}"><i class="fa fa-home" aria-hidden="true"></i>
+                             home</a></li>
+                       
+                             <li class="nav-item"><a class="nav-link" href="{{ url('/mostrar') }}"><i class="fa-solid fa-user"></i> {{ auth()->user()->name }}</a>
+
                     </ul>
                     
                 </div>
@@ -85,22 +88,18 @@
         .btn-primary{
             --bs-bg-opacity: 1;
         background-color: rgb(65, 9, 117) !important;
-
         }
         .card-header{
             --bs-bg-opacity: 1;
         background-color: rgb(233, 211, 10) !important;
-
         }
         .card-body{
             --bs-bg-opacity: 1;
         background-color: rgb(236, 234, 238) !important;
-
         }
         .form-group{
             background-color: rgb(241, 236, 245) !important;
         }
-
         .bg-dark {
             --bs-bg-opacity: 1;
         background-color: rgb(65, 9, 117) !important;
@@ -110,15 +109,17 @@
         }
     </style>
                 </form>
+                <center>
                 <h1 class="display-8 fw-bold mt-0">COLEGIO DE PROFESIONISTAS, COMPARTIR CONOCIMIENTO</h1>
+                </center>
                 <section style= "pading-top:60px">
 
                     <div class="container">
                      <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-    Regresar</a>
-    <br>
-    <br>
-                    <div class="row-3">
+Regresar</a>
+<br>
+<br>
+                <div class="row-3">
                     <div class="col-md-12">
                       <div class="car-uper">
                         <div class="card">
@@ -131,15 +132,17 @@
                                 
                                 <form class = "row g-3" action="{{route('dropzone.store')}}" method= "POST"  enctype="multipart/form-data"  
                                 >
+                                 @csrf
                                 <div class="form-group">
-                                @csrf
-                                <label for="file">Archivo:</label>
-                                <input type="file" id="file" accept="image/png, image/jpeg " 
-                                 class="form-control" name="file" 
-                                 onchange="previewImage(event,'archivo');"
-                                  />
-                                  <img src="" id="archivo" width="200px" height="200px">
-                            </div>
+                                 
+                                    <label for="file">Archivo:</label>
+                                    <input type="file" id="file" accept="application/pdf, image/png, image/jpeg"
+                                     class="form-control" name="file[]" multiple   
+                                     onchange="preview(event, 'preview' );" />
+                                      
+                                </div>
+                                <div id="preview" ></div>
+
 
                                         <div class="col-md-4">
                                             <label for="documento" class="form-label">Titulo</label>
@@ -166,15 +169,28 @@
                                             @endforeach
                                           </select>
                                         </div>
+                        
                                           <div class="col-md-4">
-                                            <label for="nomenclatura" class="form-label">Nomenclatura</label>
-                                            <input type="text" class="form-control" id="nomenclatura" name="nomenclatura">
+                                            <label for="fecha" class="form-label">Fecha</label>
+                                            <input type="date" class="form-control" id="fecha" name="fecha">
                                           </div>
                                           <div class="col-md-4">
+                                            <label for="ubicacion" class="form-label">ubicacion</label>
+                                            <select class="form-select" name="ubicacion" aria-label="Default select example">
+                                            
+                                            <option value="I">Interna</option>
+                                            <option value="E">Externa</option>
+                                            
+                                          </select>
+                                        </div>
+                                          {{-- <div class="col-md-4">
                                             <label for="ubicacion" class="form-label">Ubicacion</label>
                                             <input type="text" class="form-control" id="ubicacion" name="ubicacion">
+                                          </div> --}}
+                                          <div class="col-md-4">
+                                            <label for="url" class="form-label">Url (En caso de ser un video) </label>
+                                            <input type="text" class="form-control" id="url" name="url">
                                           </div>
-                                   
                                 </div>
                                 <br>
                                 <br>
@@ -184,7 +200,10 @@
                               <br>
                                 <center>
                                     <button type="submit" class="btn btn-warning btn-lg">Guardar</button>
-                                    <button type="submit" class="btn btn-danger btn-lg">Cancelar</button>
+                                    {{-- <button type="submit" class="btn btn-danger btn-lg">Cancelar</button> --}}
+                                    <a class="btn btn-danger btn-lg"  href="{{ url('/dropzone')}}" role="button">
+                                        Cancelar</a>
+                               
                                 </center>
                                 </form>
                                 <br>
@@ -210,16 +229,9 @@
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/dropzone-min.min.js" integrity="sha512-ALYIaHxbPRTWdNH4oNgOY8QUEVxukOdn2e/Z4dXcGGnY0mHGg4556b6sWH7KMEDzEMG9V9tvXZoYk21s7FMz2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/dropzone-min.js" integrity="sha512-FFyHlfr2vLvm0wwfHTNluDFFhHaorucvwbpr0sZYmxciUj3NoW1lYpveAQcx2B+MnbXbSrRasqp43ldP9BKJcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-   
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.2/basic.min.css" integrity="sha512-MeagJSJBgWB9n+Sggsr/vKMRFJWs+OUphiDV7TJiYu+TNQD9RtVJaPDYP8hA/PAjwRnkdvU+NsTncYTKlltgiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <body>
 
 

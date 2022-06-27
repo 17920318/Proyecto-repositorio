@@ -25,6 +25,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
          <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -43,9 +44,10 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"><i class="fa fa-home" aria-hidden="true"></i>
-                             home</a></li>                       
-                        <li class="nav-item"><a class="nav-link" href="#!"><i class="fa-solid fa-user"></i> usuario</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('busqueda') }}"><i class="fa fa-home" aria-hidden="true"></i>
+                             home</a></li>   
+                             <li class="nav-item"><a class="nav-link" href="{{ url('/mostrar') }}"><i class="fa-solid fa-user"></i> {{ auth()->user()->name }}</a>
+                    
                     </ul>
                     
                 </div>
@@ -106,6 +108,8 @@
         }
     </style>
 </form>
+<a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Regresar</a>
+
 <center> 
 <h1 class="display-8 fw-bold mt-0">EDITAR</h1>
 </center> 
@@ -147,13 +151,24 @@
                 <input type="text" class="form-control form-control-lg" id="descripcion" name="descripcion"
                 value="{{$repositorios->descripcion}}"
                 class="form-control" name="descripcion" />
-            </div>  
-            <div class="form-group">
-                <label for="file">Archivo:</label>
-                <img src="images/{{$repositorios->file}}" height="100px"  width="100px" >
-                <input type="file" id="file" accept="images/png, images/jpeg" 
-                 class="form-control" name="file" />
             </div>
+            <div class="col-md-6">
+                <label for="url" class="form-label">URL</label>
+                <input type="text" class="form-control form-control-lg" id="url" name="url"
+                value="{{$repositorios->url}}"
+                class="form-control" name="url" />
+            </div>
+            <div class="form-group">
+                                 
+                <label for="file">Archivo:</label>
+                <input type="file" id="file" accept="application/pdf, image/png, image/jpeg"
+                 class="form-control" name="file[]" multiple   
+                 onchange="preview(event, 'preview' );" />
+                  
+            </div>
+            <div id="preview" ></div>
+
+
         </div>
     </div>
     <br>

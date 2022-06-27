@@ -1,9 +1,19 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use app\Http\Controllers\ZipController;
 use App\Models\Repositorio;
+use Illuminate\Http\Request;
+use App\Models\Tipomaterial;
+use File;
+//use App\Http\Controllers\ZipArchive;
+
+use ZipArchive;
+use App\Models\Repotema;
+use App\Models\Detallerepo;
+use Illuminate\Cache\Repository;
+use Illuminate\Support\Facades\DB;
+
+
 
 class ArchivoController extends Controller
 {
@@ -19,18 +29,27 @@ class ArchivoController extends Controller
 
     public function store(Request $request)
     {
-       // $this->validateData($request); 
-       /* $campos=[
-                'titulo' => $request->titulo,
-                'descripcion'   => $request->descripcion,
-                'nomenclatura'  => $request->nomenclatura,
-                'ubicacion'     => $request->ubicacion, ];
+        $id_usuario = session("usuario_id");
+        //$id_usuario = $_SESSION['user'];
+         
+        $sql2="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+        ON r.id=ur.rol_id 
+        WHERE ur.usuario_id =:usuario";
         
-        $repositorio = Repositorio::create($campos);
-        //echo $candidato->nombrecompleto . " se guardo correctamente ... ";
-        dd ($repositorio); exit;
-        return redirect("layouts.dropzone");*/
+        $query=DB::raw($sql2);
+        //dd($query);
+        $consulta= DB::select(DB::raw($sql2),['usuario'=>$id_usuario]);
+    return view('filtrado', compact('consulta'))->with('esAdministrador',$this->isAdmin($consulta));
         
+    }
+    private function isAdmin($filas){
+        foreach ($filas as $fila){
+            if (in_array( $fila->id, [5,6] )){
+                return true;
+            }
+            
+        }
+        return false;
     }
 
     /**

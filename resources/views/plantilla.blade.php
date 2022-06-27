@@ -32,7 +32,8 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/logout') }}"><i class="fa fa-home" aria-hidden="true"></i>
                              home</a></li>
                         
-                        <li class="nav-item"><a class="nav-link" href="#!"><i class="fa-solid fa-user"></i> usuario</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/mostrar') }}"><i class="fa-solid fa-user"></i> Usuario</a>
+                        
                     </ul>
                     
                 </div>
@@ -46,7 +47,6 @@
         
         <!-- Footer-->
         <footer class="py-5 bg-orange">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

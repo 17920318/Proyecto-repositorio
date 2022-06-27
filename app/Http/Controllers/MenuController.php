@@ -28,21 +28,27 @@ class BusquedaController extends Controller
     }
     public function store(Request $request){
         
+      /* Consultar roles y permisos
+        $id_usuario = session("id_usuario");
         $id_usuario = $_SESSION['user'];
-
-        $sql="SELECT * FROM usuario u INNER JOIN usuariorol ur
-        INNER JOIN rol r ON u.id =ur.usuario_id AND ur.rol_id=r.id
-        INNER JOIN permiso p INNER JOIN rolpermiso rp ON p.id = rp.permiso_id
-        AND rp.rol_id = r.id WHERE u.id=$id_usuario";
-
-        $query=DB::raw($sql);exit;
+        
+       $sql="SELECT * FROM usuario u INNER JOIN usuariorol ur
+       INNER JOIN rol r ON u.id =ur.usuario_id AND ur.rol_id=r.id
+       INNER JOIN permiso p INNER JOIN rolpermiso rp ON p.id = rp.permiso_id
+       AND rp.rol_id = r.id WHERE u.id=:usuario";
+       
+       $query=DB::raw($sql);
+       $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
+      // dd($consulta);
+       
+       return view ('repositorio.show', compact('repositorios'))->with('esAdministrador',true);
+        /*
         //$repositorios= DB::select(DB::raw($sql),$parameters);
     
 }
 
-
-
-
+    }
+    
 
 
 
@@ -62,4 +68,4 @@ class BusquedaController extends Controller
         /*AND u.id=ur.usuario_id AND ur.rol_id=r
         p.id = rp.permiso_id AND rp.rol_id = r.id;*/
     
-     
+}
