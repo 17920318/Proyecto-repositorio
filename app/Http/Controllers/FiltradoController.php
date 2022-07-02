@@ -41,7 +41,7 @@ class FiltradoController extends Controller
         $sql = DB::table('repositorio as r')
             ->join('detallerepo as dr', 'dr.repositorio_id', '=', 'r.id')
             ->join('tipomaterial as tp', 'tp.id', '=', 'dr.material_id')
-            ->select('r.id', 'r.fecha', 'r.documento', 'r.file')
+            ->select('r.id', 'r.fecha', 'r.documento', 'r.file','r.url')
             ->where('dr.material_id', '=',  $request->id)
             ->where('r.documento', 'like', '%' . $request->titulo . '%')
             ->get();
@@ -62,7 +62,7 @@ class FiltradoController extends Controller
     }
     private function isAdmin($filas){
         foreach ($filas as $fila){
-            if (in_array( $fila->id, [1,2] )){
+            if (in_array( $fila->id, [5,6] )){
                 return true;
             }
             
@@ -99,37 +99,25 @@ class FiltradoController extends Controller
     public function descarga($file){
        // return response()->download(public_path(('images/'.$file)));
     }
-    public function download ($id=0)
+    public function download ($id)
     {
-        $zip = new ZipArchive;
+        $zip = new ZipArchive();
         $documento = Repositorio::find($id);
-
         $files = explode('|', $documento->file);
-     
-   
         $fileName = 'file_tmp.zip';
-
-       
         if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
             foreach ($files as $file) {
-            $archivo = public_path(('/images/'.$file));
+            $archivo = public_path(('images/'.$file));
           // $doc = File::get($archivo);
           $storage= Storage::path($archivo);
          // dd ($archivo); exit();
-            $zip->addFile($storage,$file);
-               
+         //$zip->addFile($storage,$file);    
             }
             $zip->close();
-           
-  
-        }
-        
-        return response()->download(public_path($fileName),time().$fileName);
+        } 
+        return response()->download(public_path($fileName));
       
-    }
-
-    
-    
+    }   
 }
 
 //class Zipper extends ZipArchive { 

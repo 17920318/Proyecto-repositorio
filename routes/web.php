@@ -58,9 +58,10 @@ Route::resource('mostrar', MostrarController::class);
 //Route::redirect('/informacion', '/there');
 Route::view('/informacion', 'informacion');
 
-
+//Route::get('url/{url}', [BusquedaController::class,'url'])->name('url');
 
 //Route::get('contactos', 'ContactosController@contactos');
 Route::get('contactos', [ContactosController::class,'contactos'])->name('contactos');
 Route::post('contactos', [ContactosController::class,'contactosPost'])->name('contactos');
 
+//

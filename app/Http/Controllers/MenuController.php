@@ -47,7 +47,9 @@ class BusquedaController extends Controller
     
 }
 
-    }
+    }*/
+  }
+}
     
 
 
@@ -67,5 +69,3 @@ class BusquedaController extends Controller
        
         /*AND u.id=ur.usuario_id AND ur.rol_id=r
         p.id = rp.permiso_id AND rp.rol_id = r.id;*/
-    
-}

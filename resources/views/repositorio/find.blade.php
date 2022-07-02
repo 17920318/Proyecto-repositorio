@@ -230,12 +230,6 @@
 </main>
 <!-- Footer-->
 <footer class="py-5 bg-orange">
-    <center>
-<div class="container"><p class="m-0 text-center text-white">Vista nuestras redes sociales:</p></div>
-<br>
-<a href="https://www.facebook.com/ColegioDeProfesionistas/" target="_blank"><img src="http://www.ariadne-comunicacion.com/blog/wp-content/uploads/2018/01/facebook.png" alt="Facebook"></a>
-    </center>
-</div>
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

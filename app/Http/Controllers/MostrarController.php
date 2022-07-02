@@ -11,12 +11,32 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 class MostrarController extends Controller
 {
-    
     public function index(){    
-    $users = User::all();   
-    return view ('usuarios.show',compact($users)); 
+    $users = User::all(); 
+    $id_usuario = session("usuario_id");
+    //$id_usuario = $_SESSION['user'];
+     
+    $sql2="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+    ON r.id=ur.rol_id 
+    WHERE ur.usuario_id =:usuario";
+    
+    $query=DB::raw($sql2);
+    //dd($query);
+    $consulta= DB::select(DB::raw($sql2),['usuario'=>$id_usuario]);
+        
+        return view ('usuarios.show',
+    compact($users))->with('esAdministrador',$this->isAdmin2($consulta));  
         //$users = User::find($id);   
         //return view ('usuarios.show');
+    }
+    private function isAdmin2($filas){
+        foreach ($filas as $fila){
+            if (in_array( $fila->id, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] )){
+                return true;
+            }
+            
+        }
+        return false;
     }
     /*public function show($id_usuario){
         $id_usuario = session("usuario_id");
@@ -53,37 +73,16 @@ class MostrarController extends Controller
         User::whereId($id_usuario = session("usuario_id"))->update($campos);
         return redirect('mostrar')->with('success', 'Actualizado correctamente...');
     }
+        
+
+
+
+
 
     } 
        
        
-        //$users = User::find($id_usuario);
-        /*$user = Auth::user($id_usuario);
-            $user->name = $request->input("name","");
-            $user->email = $request->input("email","");
-            $user->save();*/
-
-        /*$campos=['name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($data['password']),
-                ];
-        User::whereId($id_usuario)->update($campos);
-        return redirect('usuarios.show')->with('success', 'Actualizado correctamente...');
-            }*/
-
-        /* DB::transaction(function() use ($request){
-            $user = Auth::user();
-            $user->name = $request->input("name","");
-            $user->email = $request->input("email","");
-            $user->save();
-        });*/
-
-        // $user->update([
-        //     "name" => $request->name,
-        //     "email" => $request->email,
-        // ]);
-       /* return ["message" => "Updated the user info sucessfully!"];
-       */
+        
        
        
     

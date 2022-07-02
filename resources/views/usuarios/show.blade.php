@@ -1,40 +1,44 @@
 @extends('plantilla')
 
 @section('content')
+<center>
     <br>
-    <br>
-                    <center>
                         <div class="container">
                             <div class="row justify-content-center">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <div class="card">
-                                    <div class="card card-header">{{__('usuario')}}</div>
+                                    <div class="card card-header"><h2 class="display-8 fw-bold mt-0">Usuario</h2></div>
                                         <div class="card-body">
-                                            <form class = "row g-3" action="{{ route('mostrar.update',$id_usuario = session("usuario_id"))}} "method="POST" enctype="multipart/form-data">
+                                            <form class = "row " action="{{ route('mostrar.update',$id_usuario = session("usuario_id"))}} "method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
-                                            <p class="card-text">
+                                            <p class="lower-container">
                                                 <label for="documento" class="form-label">Información personal</label>
+                                                <div class="author">
                                                     <div class="panel-heading">¡¡Bienvenido!! {{ auth()->user()->name }}</p>
                                                     </div>
-                                                        <img src="{{asset('\image\usuario.png')}}" width="165" height="260"  alt="Cinque Terre">
+                                                        <img src="{{asset('\image\usuario.png')}}" class="circular--square" alt="Cinque Terre" width="200" height="200">
                                                     </a>
+                                                    <br>
+                                                    <br>
                                                     <div class="col-md-8">
-                                                        <label for="documento" class="form-label"> Nombre: </label>
-                                                        <input type="text" name="name" value="{{ auth()->user()->name }}">
+                                                        <label for="documento" class="form-label">Nombre: </label>
+                                                        <input type="text" class="form-control" name="name" value="{{ auth()->user()->name }}">
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <label for="documento" class="form-label"> Correo: </label>
-                                                        <input type="text" name="email" value="{{ auth()->user()->email }}">
+                                                        <label for="documento" class="form-label">Correo: </label>
+                                                        <input type="text" class="form-control" name="email" value="{{ auth()->user()->email }}">
 
                                                     </div>
                                                     <div class="col-md-8">
                                                         <label for="documento" class="form-label">Contraseña: </label>
-                                                        <input type="password" name="password" value="{{ auth()->user()->password }}">
+                                                        <input type="password" class="form-control" name="password" value="{{ auth()->user()->password }}">
 
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
                                                     <br>
+                                                    <button type="submit" class="btn btn-primary btn-lg" >Guardar</button>
+                                                    <br>
+                                                   <br>
                                                     <a class="btn btn-success  btn-lg"  href="{{ url('/logout')}}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         Cerrar Sesion</a>
                                                 </div>
@@ -78,7 +82,10 @@
                             --bs-bg-opacity: 1;
                         background-color: rgb(65, 9, 117) !important;
                         }
-                        
+                        .card-header{
+                            --bs-bg-opacity: 1;
+                            background-color: rgb(219, 161, 35) !important;
+                        }
                         
                         .bg-dark {
                             --bs-bg-opacity: 1;
@@ -87,6 +94,18 @@
                         .bg-orange{
                             background-color: rgb(184, 129, 12) !important;
                         }
+
+                        .circular--square {
+                        border-radius: 50%;
+                        }
+                        .card{
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                    transition: 0.3s;
+                    border-radius: 5px; /* 5px rounded corners */
+                    }
+                    .lower-container{
+                    text-align: center;
+                    }
                     </style>
         
                     

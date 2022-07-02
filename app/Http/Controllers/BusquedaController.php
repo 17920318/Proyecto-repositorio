@@ -93,7 +93,7 @@ class BusquedaController extends Controller
        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
        $coordinacion = "%$coordinacion%";
        
-       $sql ="SELECT r.id, r.fecha, r.documento, r.file FROM repositorio r INNER JOIN (repotema rt 
+       $sql ="SELECT r.id, r.fecha, r.documento, r.file, r.url FROM repositorio r INNER JOIN (repotema rt 
        INNER JOIN tema t ON rt.tema_id=t.id) 
        ON rt.repositorio_id = r.id 
        INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
@@ -152,7 +152,10 @@ class BusquedaController extends Controller
        }
        return false;
    }
+       public function url ($url=""){
+        $documento = Repositorio::find($url);
         
+       }
     
   
 
@@ -176,10 +179,8 @@ class BusquedaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    
         {
             $this->validateData($request);
-       
             $fileNames="";
             if ($request->file('file'))
             foreach($request->file('file') as $file)
@@ -188,9 +189,8 @@ class BusquedaController extends Controller
                 $file->move(public_path('images'), $name);
                 $fileNames = $fileNames.$name."|";  
                         }
-                $fileNames=substr($fileNames,0,strlen($fileNames)-1);
-                        
-            $currentValue = Repositorio::find($id);
+                $fileNames=substr($fileNames,0,strlen($fileNames)-1);        
+                $currentValue = Repositorio::find($id);
         
         if (empty($fileNames)) $fileNames = $currentValue->file;
              $campos=[

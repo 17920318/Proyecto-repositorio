@@ -19,49 +19,49 @@
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <img src="{{asset('img/Logo.jpeg')}}" alt="logo" width="14%" height="auto" margin_left=auto margin_right= auto>
-            <div class="container px-lg-5">
-                <a class="navbar-brand" href="#!">Colegio de profesionistas, compatir conocimiento</a>
-               
+            <img src="{{asset('image/logo2.png')}}" alt="logo" width="7%" height="auto" margin_left=auto margin_right= auto><br>
+            <a class="navbar-brand"><h5>COLEGIO DE PROFESIONISTAS COMPARTIR EL CONOCIMIENTO A.C.</h5></a>
+            <br>
+            <br>
+            <div class="container px-lg-3">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="{{ url('/informacion') }}"><i class="fa fa-hand-o-right" style=" color: rgb(201, 177, 25);"></i> Conócenos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}"><i class="fa-solid fa-user" style=" color: rgb(201, 177, 25);"></i> Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/contactos') }}"><i class="bi bi-chat-dots" style=" color: rgb(201, 177, 25);"></i> ¿Quieres una Consultoría?</a></li>
-                    </ul>
-                    
+                    </ul>  
                 </div>
         </nav>
         <!-- Header-->
-        <header class="py-5">
+        <header class="py-6">
             <div class="container px-lg-6">
-                <h2 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Colegio de Profesionistas, Compartir Conocimiento</p></h2>
-                <br>
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <center>
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="{{asset('img/inicio.jpg')}}" class="img-fluid" alt="estudiantes">
+                        <img src="{{asset('image/principal.jpg')}}" class="d-block w-100" alt="principal">
                       </div>
                       <div class="carousel-item">
-                        <img src="{{asset('img/ieu.jpg')}}" class="img-fluid" alt="salon de clases">
+                        <img src="{{asset('image/convenio.jpg')}}" class="d-block w-100" alt="salon de clases5">
                       </div>
                       <div class="carousel-item">
-                        <img src="{{asset('img/convenio.jpg')}}" class="img-fluid" alt="salon de clases2">
+                        <img src="{{asset('image/2.jpg')}}" class="d-block w-100" alt="salon de clases2">
                       </div>
                       <div class="carousel-item">
-                        <img src="{{asset('img/oaxaca.jpg')}}" class="img-fluid" alt="salon de clases3">
+                        <img src="{{asset('image/3.jpg')}}" class="d-block w-100" alt="salon de clases3">
                       </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
+                </div>
+                </center>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                </div>
                   <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">
                         <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Explora Nuestro Repositorio</p></h1>
@@ -164,16 +164,17 @@
                     height: 10rem;
                 width: 10rem;
                 font-size: 8ch;
-                background-color: rgb(65, 9, 117) !important;
+                background-color: rgb(84, 29, 136) !important;
                 }
             
                 .bg-dark {
                     --bs-bg-opacity: 1;
-                 background-color: rgb(65, 9, 117) !important;
+                 background-color: rgb(78, 30, 124) !important;
                 }
                 .bg-orange{
-                    background-color: rgb(184, 129, 12) !important;
+                    background-color: rgb(231, 166, 25) !important;
                 }
+                
             </style>
             </div>
             </div>
@@ -291,11 +292,16 @@
             <!-- Footer-->
             <footer class="py-5 bg-orange">
             <h4><div class="container"><p class="m-0 text-center text-black">Visita nuestras redes sociales:</p></div></h4>
-            <br>
+            
             <center>
             <a href="https://www.facebook.com/ColegioDeProfesionistas" class="bi bi-facebook fa-3x " aria-hidden="true" span style=" color: blue;"></a>
             <a href="https://www.facebook.com/ColegioDeProfesionistas" class="bi bi-twitter fa-3x"></a>
-           
+            <br>
+            <h4><div class="container"><p class="m-0 text-center text-black">Contáctanos:</p></div></h4>
+            <a class="bi bi-telephone-plus fa-1x " aria-hidden="true" span style=" color: black;"> 0449512856280</a>
+            <br>
+            <a class="bi bi-google fa-1x" aria-hidden="true" span style=" color: black;"> presidencia.cpcc@gmail.com</a>
+            
             </center>
             </footer>
 
