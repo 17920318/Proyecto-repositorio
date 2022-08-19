@@ -45,14 +45,15 @@
         <header class="py-5">
            
             <div class="container px-lg-7">
-         <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
+         <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i 
+            class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
                 <center>
                 <h1 class="display-5 fw-bold mt-0">COORDINACIONES</h1>
                 </center>
                 <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">
                      
-                        <form class="row g-3" method="post" action="{{ route('lista.store') }}">
+                        <form class="row g-3" method="GET" action="{{ route('result') }}">
                             @csrf 
                             <div class="col-md-3">
                                 <label for="coordinacion" class="form-label">Seleccionar</label>
@@ -64,7 +65,7 @@
                               </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="tipo class="form-label">Seleccionar</label>
+                                <label for="tipo" class="form-label">Seleccionar</label>
                             <select class="form-select" name="tipo" aria-label="Default select example">
                                 @foreach($tipomateriales as $tipo)
                                 <option value="{{$tipo->id}}">{{$tipo->descripcion}}</option>";
@@ -73,7 +74,8 @@
                               </select>
                             </div>
                             <div class="col-md-4">
-                              <button type="submit" class="btn btn-primary btn-form" style="display: block"><i class="fa-solid fa-magnifying-glass" target="_blank"></i>     Buscar</button>
+                              <button type="submit" class="btn btn-primary btn-form" style="display: block">
+                                <i class="fa-solid fa-magnifying-glass" target="_blank"></i>     Buscar</button>
                             
                             </div>
                           

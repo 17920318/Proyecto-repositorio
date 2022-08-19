@@ -36,17 +36,14 @@ class DropzoneController extends Controller
                 $fileNames = $fileNames . $name . "|";
             }
         $fileNames =substr($fileNames, 0, strlen($fileNames) - 1);
-
-
         $campos = [
-            'file'           => $fileNames,
-            'documento'        => $request->documento,
+            'file'          => $fileNames,
+            'documento'     => $request->documento,
             'descripcion'   => $request->descripcion,
             //'nomenclatura'  => $request->nomenclatura,
             'ubicacion'     => $request->ubicacion,
             'url'           => $request->url,
             'fecha'         => $request->fecha,
-           // 'fecha' => date('Y-m-d'),
             'usuario_id' => session('usuario_id'),
         ];
 
@@ -80,7 +77,7 @@ class DropzoneController extends Controller
             exit;
         }
 
-        return redirect("dropzone");
+        return back()->with('success', 'El archivo se ha subido correctamente');
     }
 
     function validateData(Request $request)
@@ -103,14 +100,5 @@ class DropzoneController extends Controller
     }
 
 
-    public function download(Repositorio $archivo)
-    {
-    // foreach( preg_split("/\|/",$archivo->file) as $archivo){
-
-    //}
-
-    return response()->download(public_path(('images/' . $archivo)), $archivo);
-    //$archivo->close();//Ahora solo nos queda cerrar el archivo zip que hemos creado:
-   
-}
+ 
 }

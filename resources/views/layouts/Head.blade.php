@@ -58,7 +58,6 @@
             width: 10rem;
             font-size: 8ch;
             }
-
             .bg-dark {
                 --bs-bg-opacity: 1;
              background-color: rgb(65, 9, 117) !important;
@@ -83,4 +82,3 @@
         </body>
     
     </html>
-    

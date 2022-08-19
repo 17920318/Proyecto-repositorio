@@ -46,26 +46,9 @@ class BusquedaController extends Controller
         //$repositorios= DB::select(DB::raw($sql),$parameters);
     
 }
-
     }*/
   }
 }
     
 
 
-
-
-
-
-/*    $sql= "SELECT u.id, ur.usuario_id, r.id as rolXid, ur.rol_id, p.id as permisoXid, rp.permiso_id, rp.rol_id as rpXrolXid, r.id as rXid FROM usuario u INNER JOIN usuariorol ur
-        INNER JOIN rol r ON u.id =ur.usuario_id AND ur.rol_id=r.id
-        INNER JOIN permiso p INNER JOIN rolpermiso rp ON p.id = rp.permiso_id 
-        AND rp.rol_id = r.id 
-        WHERE upper(trim(u.nombre)) like upper (trim(:usuario)) and ur.usuario_id
-        upper(trim(p.descripcion)) like upper(trim(:permiso)) and rp.permiso_id
-        AND upper(trim(r.descripcion)) like upper(trim(:rol)) and ur.rol_id";*/
-       
-        
-       
-        /*AND u.id=ur.usuario_id AND ur.rol_id=r
-        p.id = rp.permiso_id AND rp.rol_id = r.id;*/

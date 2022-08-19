@@ -108,12 +108,19 @@
         }
     </style>
 </form>
-<a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Regresar</a>
+<a class="btn btn-warning" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Regresar</a>
 
 <center> 
 <h1 class="display-8 fw-bold mt-0">EDITAR</h1>
 </center> 
 <br>
+@if (Session::has('success'))
+<div class="alert alert-success">
+
+    {{ Session::get('success') }}
+
+</div>
+@endif
 <section style= "pading-top:60px">
     <div class="container">
 <div class="row-3">

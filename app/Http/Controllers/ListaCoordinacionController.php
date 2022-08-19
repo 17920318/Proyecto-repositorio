@@ -59,14 +59,49 @@ class ListaCoordinacionController extends Controller
     {
         //
     }
+    public function paginacion(Request $request){
+        $tema= $request->tema??"";
+        $tema = "%$tema%";
+        $titulo = $request->titulo??"";
+        $titulo = "%$titulo%";
+        $id= $request->id;
+        $file = "";
+        $anio = $request->anio==-1?"":$request->anio;
+        $anio = "%$anio%";
+        $mes = $request->mes==-1?"":$request->mes;
+        $mes = "%$mes%";
+        $tipo = $request->tipo==-1?"":$request->tipo;
+        $tipo = "%$tipo%";
+        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
+        $coordinacion = "%$coordinacion%";
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+       $id_usuario = session("usuario_id");
+      //$id_usuario = $_SESSION['user'];
+       
+      $sql="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
+      ON r.id=ur.rol_id 
+      WHERE ur.usuario_id =:usuario";
+
+     
+      
+      $query=DB::raw($sql);
+      //dd($query);
+      $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
+     
+            $repositorios = DB::table('repositorio as r')
+            ->join('detallerepo as dr', 'dr.repositorio_id', '=', 'r.id')
+            ->join('tipomaterial as tp', 'tp.id', '=', 'dr.material_id')
+            ->join('rol as ur','ur.id', '=', 'r.usuario_id' )
+            ->select('r.id', 'r.fecha', 'r.documento', 'r.file','r.url')
+
+            ->where ('ur.id', 'LIKE', "%{$coordinacion}%")
+            ->where('dr.material_id',  'LIKE',"%{$tipo}%" ) 
+            ->paginate(10);
+
+    return view ('repositorio.show', compact('repositorios','consulta'))->with('esAdministrador',$this->isAdmin($consulta));
+    }
+    
+    /*public function store(Request $request)
     {
      
        $tipo = $request->tipo==-1?"":$request->tipo;
@@ -74,7 +109,7 @@ class ListaCoordinacionController extends Controller
        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
        $coordinacion = "%$coordinacion%";
        
-       $sql ="SELECT r.id, r.fecha, r.documento, r.file FROM repositorio r INNER JOIN (repotema rt 
+       $sql ="SELECT r.id, r.fecha, r.documento, r.file , r.url FROM repositorio r INNER JOIN (repotema rt 
        INNER JOIN tema t ON rt.tema_id=t.id) 
        ON rt.repositorio_id = r.id 
        INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
@@ -114,10 +149,10 @@ class ListaCoordinacionController extends Controller
       
         
     
-    }
+    }*/
     private function isAdmin($filas){
         foreach ($filas as $fila){
-            if (in_array( $fila->id, [5,6] )){
+            if (in_array( $fila->id, [1,2] )){
                 return true;
             }
             
@@ -180,9 +215,7 @@ class ListaCoordinacionController extends Controller
         return redirect('busqueda');
         //
     }
-    public function download (Repositorio $archivo){
-          
-
+        public function download (Repositorio $archivo){
         // $documento=Repositorio:: where ('id', $id)->firstFail();
           //   $pathToFile = public_path ('images'.$image->documento);
            //  retun response()->download($pathToFile); 

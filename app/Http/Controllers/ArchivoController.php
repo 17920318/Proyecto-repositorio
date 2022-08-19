@@ -44,7 +44,7 @@ class ArchivoController extends Controller
     }
     private function isAdmin($filas){
         foreach ($filas as $fila){
-            if (in_array( $fila->id, [5,6] )){
+            if (in_array( $fila->id, [1,2] )){
                 return true;
             }
             

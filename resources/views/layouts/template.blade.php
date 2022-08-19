@@ -163,7 +163,6 @@
                             font-size: 8ch;
                             background-color: rgb(65, 9, 117) !important;
                             }
-
                             .bg-dark {
                                 --bs-bg-opacity: 1;
                              background-color: rgb(65, 9, 117) !important;

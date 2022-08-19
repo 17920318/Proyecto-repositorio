@@ -34,7 +34,7 @@
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <img src="{{asset('image/logo2.png')}}" alt="logo" width="7%" height="auto" margin_left=auto margin_right= auto>
+            <img src="{{asset('image/logo2.png')}}" alt="logo" width="10%" height="auto" margin_left=auto margin_right= auto>
             <a class="navbar-brand"><h5>COLEGIO DE PROFESIONISTAS COMPARTIR EL CONOCIMIENTO A.C.</h5></a>
             <br>
             <br>
@@ -57,8 +57,10 @@
         </nav>
     </head>
     <br>
-            <div class="container px-lg-7">
-             <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
+    <header class="py-5">
+        <div class="container px-lg-7">  
+             <a class="btn btn-warning" href="{{ url()->previous() }}" role="button">
+                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Regresar</a>
             @if( $id == 5)
                 <center>
                 <h1 class="display-5 fw-bold mt-0">ARTICULOS</h1>
@@ -69,7 +71,7 @@
                 <h1 class="display-5 fw-bold mt-0">PROPUESTAS DE LEY</h1>
                 </center>
                 @endif
-                 @if( $id == 7)
+                 @if( $id == 8)
                 <center>
                 <h1 class="display-5 fw-bold mt-0">CONVENIOS</h1>
                 </center>
@@ -94,38 +96,129 @@
                 <h1 class="display-5 fw-bold mt-0">TALLERES</h1>
                 </center>
                 @endif
+                <center>
+      
                 <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                
                     <div class="m-2 m-lg-5">
-                <form class="row g-3" method="post" action="{{ route('filtrado') }}">
+                <form class="row g-3 " method="post" action="{{ route('filtrado') }}">
                     @csrf
                         <div class="col-md-8">
-                            <label for="titulo" class="form-label">Inserte titulo o tema </label>
+
+                            <label for = "titulo" class="form-label">Inserte titulo o tema </label>
                             <input type="text" class="form-control" id="titulo" name="titulo">
+
                         </div>
                         <input type="int" value="{{ $id }}" hidden name="id">
-                        <div class="col-md-4">
+                       
+                        <div class="col-md-2">
+
                             <button type="submit" class="btn btn-primary btn-form" style="display: block"><i class="fa-solid fa-magnifying-glass" target="_blank"></i>     Buscar</button>
+
                         </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
                         
+                       
+                        <br>
+                        <br>
+                        <br>
+                      
+ 
                         
                 </form>
+            </center>
                 <br>
                 @if ($esAdministrador == true )
                 <div class="container px-lg-5">
                     <div class="d-grid gap-2 col-5 mx-auto">
                     <a class="btn btn-warning" href="{{ url('/dropzone') }}" role="button">Subir Archivo</a> 
                 </div>
-               
-               
+
                 <br>
                 <br>
+                @if (Session::has('success'))
+                <div class="alert alert-success">
+    
+                    {{ Session::get('success') }}
+    
                 </div>
-                 @endif
+            @endif
+            <br>
+                <table class="table responsive table-striped text-center">
+                    <tbody>
+                        <tr>
+    
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Archivo</th>
+                            <th scope="col">Vizualizar</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+    
+                        @foreach ($sql as $sq)
+                            <form action="{{ route('delete', $sq->id) }}" method="post">
+                                @csrf
+    
+                                <tr>
+    
+                                    <td>
+                                        {{ $sq->fecha }}
+                                    </td>
+    
+                                    <td>
+    
+                                        {{ $sq->documento }}
+    
+                                    </td>
+    
+    
+                                    <td>
+                                        <a href="{{ $sq->url }}"target="_blank">{{ $sq->url }}<br></a>
+                                        @foreach (preg_split('/\|/', $sq->file) as $archivo)
+                                            <a href="/./images/{{ $archivo }}" target="_blank">
+                                                {{ $archivo }} <br> </a>
+                                        
+                                        @endforeach
+    
+                                    </td>
+    
+    
+                                    <td>
+    
+                                        <a class="btn btn-warning  " href="{{ url('download/' . $sq->id) }}"
+                                            role="button"><i class="fa fa-download" aria-hidden="true"></i>
+                                            </a>
+    
+    
+    
+                                        @php
+                                        @endphp
+                                        @if ($esAdministrador === true)
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger " title="Delete Contact"
+                                                onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o"
+                                                    aria-hidden="true"></i> </button>
+    
+                                            <a class="btn btn-success  " href="{{ route('busqueda.edit', $sq->id) }}"
+                                                role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                    </td>
+                                @else
+                        @endif
+                        </form>
+    
+                        </tr>
+                        @endforeach
+    
+                    </tbody>
+                </table>
+                @endif
+               
+                <div class="d-flex justify-content-end">
+
+                    {!!$sql->links()!!}
+    
+                </div> 
+                </div>
+                
                 </div>
 
                

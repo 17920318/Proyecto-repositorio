@@ -43,7 +43,6 @@ class MostrarController extends Controller
         //$user = User::find($id_usuario);
         //dd($user);
         return view ('usuarios.show', compact('user'));
-
     }*/
     public function show (){
         //
@@ -80,9 +79,4 @@ class MostrarController extends Controller
 
 
     } 
-       
-       
-        
-       
-       
     

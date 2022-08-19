@@ -86,22 +86,18 @@
         .btn-primary{
             --bs-bg-opacity: 1;
         background-color: rgb(65, 9, 117) !important;
-
         }
         .card-header{
             --bs-bg-opacity: 1;
         background-color: rgb(233, 211, 10) !important;
-
         }
         .card-body{
             --bs-bg-opacity: 1;
         background-color: rgb(65, 9, 117) !important;
-
         }
         .form-group{
             background-color: rgb(65, 9, 117) !important;
         }
-
         .bg-dark {
             --bs-bg-opacity: 1;
         background-color: rgb(65, 9, 117) !important;

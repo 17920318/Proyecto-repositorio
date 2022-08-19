@@ -77,55 +77,44 @@
             flex-wrap: wrap;
             justify-content: space-between;
         }
-
         .btn-form {
             box-sizing: border-box;
             margin-top: 30px;
         }
-
         .col-xxl-4 {
             width: 30%;
             margin-left: auto;
             margin-right: auto;
         }
-
         .container {
-
             margin-left: auto;
             margin-right: auto;
         }
-
         .feature {
             height: 10rem;
             width: 10rem;
             font-size: 8ch;
             background-color: rgb(65, 9, 117) !important;
         }
-
         .btn-primary {
             --bs-bg-opacity: 1;
             background-color: rgb(65, 9, 117) !important;
         }
-
         .card-header {
             --bs-bg-opacity: 1;
             background-color: rgb(233, 211, 10) !important;
         }
-
         .card-body {
             --bs-bg-opacity: 1;
             background-color: rgb(236, 234, 238) !important;
         }
-
         .form-group {
             background-color: rgb(241, 236, 245) !important;
         }
-
         .bg-dark {
             --bs-bg-opacity: 1;
             background-color: rgb(65, 9, 117) !important;
         }
-
         .bg-orange {
             background-color: rgb(184, 129, 12) !important;
         }
@@ -137,10 +126,11 @@
     <section style="pading-top:60px">
 
         <div class="container">
-            <a class="btn btn-primary" href="{{ url()->previous() }}" role="button"><i
+            <a class="btn btn-warning" href="{{ url()->previous() }}" role="button"><i
                     class="fa fa-chevron-circle-left" aria-hidden="true"></i>
                 Regresar</a>
             <br>
+
             <br>
             <div class="row-3">
                 <div class="col-md-12">
@@ -151,6 +141,16 @@
                             <div class="card-header">
                                 Subir Archivo
                             </div>
+                            <br>
+                            @if (Session::has('success'))
+                            <div class="alert alert-success">
+                
+                                {{ Session::get('success') }}
+                
+                            </div>
+                        @endif
+                        <br>
+
                             <div class="card-body">
 
                                 <form class="row g-3" action="{{ route('dropzone.store') }}" method="POST"
@@ -158,14 +158,14 @@
                                     @csrf
                                     <div class="form-group">
 
-                                        <label for="file">Archivo:</label>
+                                        <label for="file">Archivo:tamaño máximo para archivos: 10MB, número máximo de archivos:20:</label>
                                         <input type="file" id="file"
                                             accept="application/pdf, image/png, image/jpeg" class="form-control"
                                             name="file[]" multiple onchange="preview(event, 'preview' );" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="20000" />
 
                                     </div>
                                     <div id="preview"></div>
-
 
                                     <div class="col-md-4">
                                         <label for="documento" class="form-label">Titulo</label>

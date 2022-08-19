@@ -1,16 +1,16 @@
-Hello,
+Hola,
 
 
-You received a message from : {{ $name }}
+Haz recibido un mensaje de : {{ $name }}
 
 <p>
-    User Name: {{ $name }}
+    Su nombre es: {{ $name }}
 </p>
 
 <p>
-    User Email: {{ $email }}
+    Su email: {{ $email }}
 </p>
 
 <p>
-    Message provided: {{ $user_message }}
+    Mensaje: {{ $user_message }}
 </p>

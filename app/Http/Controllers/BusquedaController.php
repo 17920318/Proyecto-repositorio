@@ -54,10 +54,11 @@ class BusquedaController extends Controller
         compact('tipomateriales','coordinaciones'));
         
     }
-  
-    
+    /*public function getData(){
 
-
+      $employees = Repositorio::paginate(8);
+      return view('repositorio.show', compact('employees'));
+    }*/
     /**
      * Show the form for creating a new resource.
      *
@@ -77,75 +78,52 @@ class BusquedaController extends Controller
      */
     public function store(Request $request)
     {
-        
-       $tema= $request->tema??"";
-       $tema = "%$tema%";
-       $titulo = $request->titulo??"";
-       $titulo = "%$titulo%";
+        $tema= $request->tema??"";
+        $tema = "%$tema%";
+        $titulo = $request->titulo??"";
+        $titulo = "%$titulo%";
     
        $file = "";
        $anio = $request->anio==-1?"":$request->anio;
-       $anio = "%$anio%";
-       $mes = $request->mes==-1?"":$request->mes;
-       $mes = "%$mes%";
-       $tipo = $request->tipo==-1?"":$request->tipo;
-       $tipo = "%$tipo%";
-       $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
+        $anio = "%$anio%";
+        $mes = $request->mes==-1?"":$request->mes;
+        $mes = "%$mes%";
+        $tipo = $request->tipo==-1?"":$request->tipo;
+        $tipo = "%$tipo%";
+        $coordinacion = $request->coordinacion==-1?"":$request->coordinacion;
        $coordinacion = "%$coordinacion%";
        
-       $sql ="SELECT r.id, r.fecha, r.documento, r.file, r.url FROM repositorio r INNER JOIN (repotema rt 
-       INNER JOIN tema t ON rt.tema_id=t.id) 
-       ON rt.repositorio_id = r.id 
-       INNER JOIN detallerepo dr ON dr.repositorio_id=r.id 
-       INNER JOIN (usuario u  INNER JOIN usuariorol ur ON ur.usuario_id=u.id)
-       ON u.id=r.usuario_id 
-       WHERE upper(trim(t.descripcion)) like upper(trim(:tema)) and
-        dr.material_id like :tipo or
-        upper(trim(r.documento)) like upper(trim(:titulo)) and
-        month(r.fecha) like :mes AND
-        year(r.fecha) like :anio AND
-        ur.rol_id like :coordinacion";
-
-        $parameters= ['tema'=> $tema,
-            'tipo'=> $tipo ,
-            'titulo'=> $titulo,
-            'mes'=> $mes ,
-            'anio'=> $anio ,
-          'coordinacion'=> $coordinacion,
-        
-        ];
-
-        //subir archivos
-
-     
-        $query=DB::raw($sql);
-       
-        $repositorios= DB::select(DB::raw($sql),$parameters);
-    
-        // ($repositorios); exit;
-       // dd($repositorios); exit; 
-
-      //Consultar roles y permisos
-      $id_usuario = session("usuario_id");
+       $id_usuario = session("usuario_id");
       //$id_usuario = $_SESSION['user'];
        
       $sql="SELECT r.id,r.descripcion FROM rol r INNER JOIN usuariorol ur
       ON r.id=ur.rol_id 
       WHERE ur.usuario_id =:usuario";
-      
-      $query=DB::raw($sql);
-      //dd($query);
-      $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
-      //dd($consulta);
-      
-      return view ('repositorio.show', compact('repositorios','consulta'))->with('esAdministrador',$this->isAdmin($consulta));
        
-   }
+      
+ 
+        $query=DB::raw($sql);
+        //dd($query);
+        $consulta= DB::select(DB::raw($sql),['usuario'=>$id_usuario]);
+        $repositorios = DB::table('repositorio as r')
+        ->join('detallerepo as dr', 'dr.repositorio_id', '=', 'r.id')
+        ->join('tipomaterial as tp', 'tp.id', '=', 'dr.material_id')
+        ->join('rol as ur','ur.id', '=', 'r.usuario_id' )
+        ->select('r.id', 'r.fecha', 'r.documento', 'r.file','r.url')
+        ->Where('documento', 'LIKE', "%{$titulo}%")
+        ->Where('fecha', 'LIKE', "%{$mes}%")
+        ->Where('fecha', 'LIKE', "%{$anio}%") 
+        ->where ('ur.id', 'LIKE', "%{$coordinacion}%")
+        ->where('dr.material_id',  'LIKE',"%{$tipo}%" )
+        ->paginate(10);
 
+        return view ('repositorio.show', compact('repositorios','consulta'))->with('esAdministrador',$this->isAdmin($consulta));
+
+    } 
 
    private function isAdmin($filas){
        foreach ($filas as $fila){
-           if (in_array( $fila->id, [5,6] )){
+           if (in_array( $fila->id, [1,2] )){
                return true;
            }
            
@@ -235,7 +213,7 @@ class BusquedaController extends Controller
             DB::rollBack();
             echo $ex->getMessage();exit;
         }
-        return redirect('busqueda');
+        return redirect('busqueda')->with('success', 'Eliminado correctamente...');;
         
     }
 

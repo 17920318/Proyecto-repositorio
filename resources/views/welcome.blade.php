@@ -27,7 +27,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/informacion') }}"><i class="fa fa-hand-o-right" style=" color: rgb(201, 177, 25);"></i> Conócenos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/informacion') }}">
+                            <i class="fa fa-hand-o-right" style=" color: rgb(201, 177, 25);"></i> Conócenos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/logout') }}"><i class="fa-solid fa-user" style=" color: rgb(201, 177, 25);"></i> Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/contactos') }}"><i class="bi bi-chat-dots" style=" color: rgb(201, 177, 25);"></i> ¿Quieres una Consultoría?</a></li>
                     </ul>  
@@ -64,7 +65,8 @@
                 </div>
                   <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-2 m-lg-5">
-                        <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black">Explora Nuestro Repositorio</p></h1>
+                        <h1 class="display-8 fw-bold mt-0"><p class="m-0 text-center text-black"
+                            >Explora Nuestro Repositorio</p></h1>
                         <br>
                         <form class="row g-3" method="post" action="{{ route('busqueda.store') }}">
                             @csrf
@@ -93,10 +95,7 @@
                             <div class="col-md-4">
                                 <label for="mes" class="form-label">Mes</label>
                             <select class="form-select" name="mes" aria-label="Default select example">
-                                <option selected value="-1">Todos</option>
-                               
-                                
-                                
+                                <option selected value="-1">Todos</option> 
                                 <option value="1">Enero</option>
                                 <option value="2">Febrero</option>
                                 <option value="3">Marzo</option>
@@ -150,7 +149,8 @@
                     box-sizing: border-box;
                     margin-top: 30px;
                 }
-                .fa-scale-balanced ,.fa-book, .fa-file-signature, .fa-people-line, .fa-users-between-lines, .fa-people-group, .fa-users-gear {
+                .fa-scale-balanced ,.fa-book, .fa-file-signature, .fa-people-line, 
+                .fa-users-between-lines, .fa-people-group, .fa-users-gear {
                 
                     font-size: 8ch;
                 }
@@ -262,10 +262,10 @@
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
-                                <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 7]) }}"role="button"><i class="fa-solid fa-people-group"></i>
+                                <a class="btn btn-outline-warning" href="{{route('formulario', ['id' => 8]) }}"role="button"><i class="fa-solid fa-people-group"></i>
                 </a>
                             </div>
-                                <a class="btn btn-darck" href="{{route('formulario', ['id' => 7]) }}" role="button"><h2 class="fs-4 fw-bold">Convenios</h2></a>
+                                <a class="btn btn-darck" href="{{route('formulario', ['id' => 8]) }}" role="button"><h2 class="fs-4 fw-bold">Convenios</h2></a>
                            
                             <p class="mb-0"></p>
                         </div>
@@ -291,11 +291,12 @@
             </main>
             <!-- Footer-->
             <footer class="py-5 bg-orange">
-            <h4><div class="container"><p class="m-0 text-center text-black">Visita nuestras redes sociales:</p></div></h4>
+            <h4><div class="container"><p class="m-0 text-center text-black">
+                Visita nuestras redes sociales:</p></div></h4>
             
             <center>
             <a href="https://www.facebook.com/ColegioDeProfesionistas" class="bi bi-facebook fa-3x " aria-hidden="true" span style=" color: blue;"></a>
-            <a href="https://www.facebook.com/ColegioDeProfesionistas" class="bi bi-twitter fa-3x"></a>
+            <a href="https://twitter.com/cpcc_ac" class="bi bi-twitter fa-3x"></a>
             <br>
             <h4><div class="container"><p class="m-0 text-center text-black">Contáctanos:</p></div></h4>
             <a class="bi bi-telephone-plus fa-1x " aria-hidden="true" span style=" color: black;"> 0449512856280</a>
